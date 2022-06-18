@@ -1,0 +1,13 @@
+@import '../../assets/styles/variables.scss';
+
+.root {
+
+}
+
+.button {
+  padding: 0.7rem 1rem;
+  border-radius: 2rem;
+  background-color: $blue;
+  border: none;
+  outline: none;
+}
