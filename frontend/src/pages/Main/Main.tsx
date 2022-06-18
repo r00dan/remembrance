@@ -1,10 +1,14 @@
-import { Button } from "../../components";
+import { Layout, Block } from '../../components';
+
+import styles from './Main.module.scss';
 
 export function Main() {
   return (
-    <div>
-      Main page
-      <Button>Test button component</Button>
-    </div>
+    <Layout>
+      <div className={styles.root}>
+        <Block>Форма создания сервиса</Block>
+        <Block>Список сервисов</Block>
+      </div>
+    </Layout>
   );
 }
