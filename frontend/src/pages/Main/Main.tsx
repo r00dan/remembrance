@@ -1,4 +1,9 @@
-import { Layout, Block } from '../../components';
+import {
+  Layout,
+  Block,
+  Button,
+} from '../../components';
+import { Themes } from '../../components/Button/types';
 
 import styles from './Main.module.scss';
 
@@ -9,6 +14,7 @@ export function Main() {
         <Block>Форма создания сервиса</Block>
         <Block>Список сервисов</Block>
       </div>
+      <Button theme={Themes.PRIMARY}>Кнопка</Button>
     </Layout>
   );
 }
