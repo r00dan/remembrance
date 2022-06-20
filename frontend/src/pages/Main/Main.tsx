@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { getServices } from '../../api/services';
+import { getUsers } from '../../api/users';
 import {
   Layout,
   Block,
@@ -8,6 +11,10 @@ import { Themes } from '../../components/Button/types';
 import styles from './Main.module.scss';
 
 export function Main() {
+  useEffect(() => {
+    getServices();
+    getUsers();
+  }, []);
   return (
     <Layout>
       <div className={styles.root}>
