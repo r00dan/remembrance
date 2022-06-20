@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "secures",
+  "info": {
+    "singularName": "secure",
+    "pluralName": "secures",
+    "displayName": "Secure"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "code": {
+      "type": "integer",
+      "required": true,
+      "min": 1,
+      "unique": true,
+      "max": 9999
+    }
+  }
+}
