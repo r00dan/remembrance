@@ -1,4 +1,4 @@
-import { useRoutes } from "react-router-dom";
+import { useRoutes } from 'react-router-dom';
 import {
   MainPage,
   AuthPage,
@@ -26,6 +26,6 @@ export function Router() {
       element: <LoginPage />,
     },
   ]);
-  
+
   return routes;
 }
