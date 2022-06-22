@@ -1,24 +1,39 @@
 @import '../../assets/styles/variables.scss';
 
 .root {
-
+  width: 100%;
+  margin: 1rem 0;
 }
 
 .button {
+  width: 100%;
+  font-size: 1rem;
+  text-transform: uppercase;
   padding: 0.7rem 1rem;
-  border-radius: 2rem;
+  border-radius: 10px;
   border: none;
   outline: none;
-  width: 100px;
-  height: 30px;
+  cursor: pointer;
+  box-shadow: $buttonShadow;
+  font-weight: 600;
+  transition-duration: .3s;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 .primary {
   background-color: $blue;
-  
+  color: white;
 }
 
 .secondary {
-  background-color: $red;
-  
+  background-color: $purple;
+  color: white;
+}
+
+.gradient {
+  color: white;
+  background: $gradient;
 }

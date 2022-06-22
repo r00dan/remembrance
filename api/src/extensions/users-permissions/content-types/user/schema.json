@@ -62,14 +62,6 @@
       "target": "plugin::users-permissions.role",
       "inversedBy": "users",
       "configurable": false
-    },
-    "secureCode": {
-      "type": "integer",
-      "max": 9999,
-      "min": 1,
-      "private": true,
-      "required": true,
-      "default": 0
     }
   }
 }

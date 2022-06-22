@@ -1,29 +1,25 @@
-import { useRoutes } from 'react-router-dom';
+import { Navigate, useRoutes } from 'react-router-dom';
+import { useAuth } from './hooks/useAuth';
 import {
   MainPage,
   AuthPage,
-  LoginPage,
 } from './pages';
 
 enum Routes {
   MAIN = '/',
   AUTH = 'auth',
-  LOGIN = 'login',
 }
 
 export function Router() {
+  const { isAuthorized } = useAuth();
   const routes = useRoutes([
     {
       path: Routes.MAIN,
-      element: <MainPage />,
+      element: isAuthorized ? <MainPage /> : <Navigate to={Routes.AUTH} replace />,
     },
     {
       path: Routes.AUTH,
       element: <AuthPage />,
-    },
-    {
-      path: Routes.LOGIN,
-      element: <LoginPage />,
     },
   ]);
 

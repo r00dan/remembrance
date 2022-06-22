@@ -7,12 +7,18 @@ import styles from './Button.module.scss';
 export function Button({
   theme = Themes.PRIMARY,
   children,
+  className,
+  onClick,
 }: IButtonProps) {
   return (
-    <div className={styles.root}>
+    <div
+      className={styles.root}
+      onClick={onClick}
+    >
       <button className={classnames([
         styles.button,
-        theme === Themes.PRIMARY ? styles.primary : styles.secondary,
+        styles[theme],
+        !!className && className,
       ])}
       >
         {children}

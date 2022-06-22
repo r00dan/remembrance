@@ -35,6 +35,7 @@ module.exports = {
         "no-irregular-whitespace": "off",
         "no-unused-expressions": "off",
         "no-unused-vars": "off",
+        "no-unsafe-return": "off",
         "no-empty-function": "error",
         "max-len": ["error", { "code": 130, "ignoreComments": true, "ignoreStrings": true }],
         "no-nested-ternary": "off",

@@ -1,0 +1,31 @@
+@import '../../assets/styles/variables.scss';
+
+.root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  margin-bottom: 3px;
+}
+
+.input {
+  font-size: 1.2rem;
+  padding: .4rem .7rem;
+  border: 1px solid $lightGray;
+  border-radius: 10px;
+  outline: none;
+
+  &:focus {
+    border-color: $blue;
+  }
+}
+
+.passwordSwitch {
+  position: absolute;
+  right: 1rem;
+  top: 1.9rem;
+  user-select: none;
+  cursor: pointer;
+}

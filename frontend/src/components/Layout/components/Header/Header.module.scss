@@ -1,6 +1,19 @@
+@import '../../../../assets/styles/variables.scss';
+
 .root {
+  position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 0 1rem;
+  border-bottom: 1px solid $lightGray;
+}
+
+.logo {
+  text-transform: uppercase;
+}
+
+.username {
+  position: absolute;
+  right: 1rem;
 }
