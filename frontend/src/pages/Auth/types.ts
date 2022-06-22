@@ -2,7 +2,12 @@ import { ChangeEvent } from 'react';
 import { ISignInParams, ISignUpParams } from '../../api/auth';
 
 export interface ISignUpConfig extends ISignUpParams {}
-export interface ISignInConfig extends ISignInParams {}
+export interface ISignInConfig extends ISignInParams { }
+export interface IAuthorizedUser {
+  username: string;
+  token: string;
+  services: string[];
+}
 
 export interface IAuthProps {
   signUpConfig: ISignUpConfig;

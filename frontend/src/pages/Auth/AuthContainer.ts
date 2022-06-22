@@ -1,17 +1,33 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ChangeEvent, createElement, useState } from 'react';
+import { useRecoilState } from 'recoil';
 
-import { ISignUpConfig, IAuthProps, ISignInConfig } from './types';
+import {
+  ISignUpConfig,
+  IAuthProps,
+  ISignInConfig,
+} from './types';
 import { Auth } from './Auth';
 import { signIn, signUp } from '../../api/auth';
 import { getError, Errors } from '../../utils/errors';
-import { useAuth } from '../../hooks/useAuth';
+import {
+  authorizedUserUsernameState,
+  authorizedUserEmailState,
+  authorizedUserTokenState,
+} from '../../store/atoms';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 export function AuthContainer() {
-  const { setJwtToken } = useAuth();
+  const [username, setUsername] = useRecoilState(authorizedUserUsernameState);
+  const [email, setEmail] = useRecoilState(authorizedUserEmailState);
+  const [token, setToken] = useRecoilState(authorizedUserTokenState);
+
   const [signUpError, setSignUpError] = useState<string | null>(null);
   const [signInError, setSignInError] = useState<string | null>(null);
   const [signUpConfig, setSignUpConfig] = useState<ISignUpConfig>({ email: '', username: '', password: '' });
   const [signInConfig, setSignInConfig] = useState<ISignInConfig>({ identifier: '', password: '' });
+
+  const { updateStoreItem } = useLocalStorage('auth_token');
 
   function handleSignUpEmailChange({ target: { value } }: ChangeEvent<HTMLInputElement>): void {
     setSignUpConfig((prevState) => ({
@@ -58,6 +74,22 @@ export function AuthContainer() {
     return !!identifier.trim() && !!password.trim();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function onSuccesAuth(response: any): void {
+    const {
+      jwt,
+      user: {
+        email,
+        username,
+      },
+    } = response;
+
+    updateStoreItem(jwt);
+    setToken(jwt);
+    setUsername(username);
+    setEmail(email);
+  }
+
   async function handleSignUpClick(): Promise<void> {
     const isValid = areSignUpFieldsValid();
 
@@ -65,7 +97,7 @@ export function AuthContainer() {
       setSignUpError(null);
       const response = await signUp(signUpConfig);
       if (response.jwt) {
-        setJwtToken(response.jwt);
+        onSuccesAuth(response);
       } else {
         setSignUpError(getError(Errors.UNKNOWN, response.error.message));
       }
@@ -82,7 +114,7 @@ export function AuthContainer() {
       const response = await signIn(signInConfig);
 
       if (response.jwt) {
-        setJwtToken(response.jwt);
+        onSuccesAuth(response);
       } else {
         setSignInError(getError(Errors.UNKNOWN, response.error.message));
       }

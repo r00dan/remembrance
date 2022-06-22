@@ -9,6 +9,7 @@
     "react-helmet": "^6.1.0",
     "react-router-dom": "6",
     "react-scripts": "5.0.1",
+    "recoil": "^0.7.4",
     "strapi-generate-types": "^0.1.4"
   },
   "scripts": {

@@ -65,7 +65,7 @@ export function Auth({
               Join
             </Button>
           </div>
-          <Separator width={75} />
+          <Separator width={80} />
           <div className={styles.signin}>
             <h2 className={styles.title}>Sign In</h2>
             <Input

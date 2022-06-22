@@ -1,12 +1,19 @@
-import styles from './Separator.module.scss';
+import classnames from 'classnames';
+
 import { ISeparatorProps } from './types';
+
+import styles from './Separator.module.scss';
 
 export function Separator({
   width = 100,
+  shadowed = false,
 }: ISeparatorProps) {
   return (
     <div
-      className={styles.root}
+      className={classnames([
+        styles.root,
+        shadowed && styles.shadowed,
+      ])}
       style={{ width: `${width}%` }}
     />
   );

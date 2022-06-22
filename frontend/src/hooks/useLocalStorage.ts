@@ -1,27 +1,29 @@
 import { useEffect, useState } from 'react';
 
-export function useLocalStorage<T = string>(key: string, value?: T) {
-  const [storeItem, setStoreItem] = useState<T | null>(null);
-
+export function useLocalStorage(key: string, value?: string) {
   useEffect(() => {
     if (!window.localStorage) {
-      throw new Error('There is no localstorage in browser');
+      throw new Error('There is no localstorage in your browser');
     } else {
       const storage = window.localStorage;
 
       if (!storage.getItem(key)) {
-        storage.setItem(key, String(value));
+        storage.setItem(key, String(value || ''));
       }
     }
   }, []);
 
-  useEffect(() => {
-    window.localStorage.setItem(key, String(storeItem));
-  }, [storeItem]);
+  const [storeItem, setStoreItem] = useState<string>(String(window.localStorage.getItem(key)));
 
-  function updateStoreItem(value: T): void {
+  function updateStoreItem(value: string): void {
     setStoreItem(value);
   }
+
+  useEffect(() => {
+    if (storeItem) {
+      window.localStorage.setItem(key, String(storeItem));
+    }
+  }, [storeItem]);
 
   return { storeItem, updateStoreItem };
 }
