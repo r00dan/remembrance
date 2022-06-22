@@ -11,11 +11,15 @@ import { IAuthProps } from './types';
 export function Auth({
   signUpConfig,
   signInConfig,
+  signUpError,
+  signInError,
   onSignUpEmailChange,
   onSignUpPasswordChange,
   onSignUpUsernameChange,
-  onSignInUsernameChange,
+  onSignInIdentifierChange,
   onSignInPasswordChange,
+  onSignUpClick,
+  onSignInClick,
 }: IAuthProps) {
   const {
     email: signUpEmail,
@@ -23,7 +27,7 @@ export function Auth({
     password: signUpPassword,
   } = signUpConfig;
   const {
-    username: signInUsername,
+    identifier,
     password: signInPassword,
   } = signInConfig;
   return (
@@ -51,9 +55,12 @@ export function Auth({
               label="Password"
               onChange={onSignUpPasswordChange}
             />
+            {signUpError && (
+              <div className={styles.error}>{signUpError}</div>
+            )}
             <Button
               theme={ButtonThemes.GRADIENT}
-              onClick={() => { }}
+              onClick={onSignUpClick}
             >
               Join
             </Button>
@@ -62,10 +69,10 @@ export function Auth({
           <div className={styles.signin}>
             <h2 className={styles.title}>Sign In</h2>
             <Input
-              id="signin_username"
-              value={signInUsername}
-              label="Username"
-              onChange={onSignInUsernameChange}
+              id="signin_identifier"
+              value={identifier}
+              label="Email / Username"
+              onChange={onSignInIdentifierChange}
             />
             <Input
               isPassword
@@ -74,10 +81,13 @@ export function Auth({
               label="Password"
               onChange={onSignInPasswordChange}
             />
+            {signInError && (
+              <div className={styles.error}>{signInError}</div>
+            )}
             <Button
               className={styles.button}
               theme={ButtonThemes.PRIMARY}
-              onClick={() => { }}
+              onClick={onSignInClick}
             >
               Go in
             </Button>

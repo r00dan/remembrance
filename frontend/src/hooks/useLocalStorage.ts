@@ -19,5 +19,9 @@ export function useLocalStorage<T = string>(key: string, value?: T) {
     window.localStorage.setItem(key, String(storeItem));
   }, [storeItem]);
 
-  return [storeItem, setStoreItem];
+  function updateStoreItem(value: T): void {
+    setStoreItem(value);
+  }
+
+  return { storeItem, updateStoreItem };
 }

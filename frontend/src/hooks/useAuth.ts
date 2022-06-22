@@ -3,15 +3,27 @@ import { useEffect, useState } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
 export function useAuth() {
-  const fieldName = 'isAuthorized';
-  const [isAuthorized, setAuthorized] = useState<boolean>(false);
-  const [value, setValue] = useLocalStorage(fieldName, isAuthorized);
+  const [authToken, setAuthToken] = useState<string>('');
+  const { storeItem, updateStoreItem } = useLocalStorage('auth_token');
 
   useEffect(() => {
-    console.log(value);
+    if (storeItem) {
+      setAuthToken(storeItem);
+    } else {
+      updateStoreItem('');
+    }
   }, []);
 
+  useEffect(() => {
+    updateStoreItem(authToken);
+  }, [authToken]);
+
+  function setJwtToken(token: string) {
+    setAuthToken(token);
+  }
+
   return {
-    isAuthorized,
+    isAuthorized: !!authToken.trim(),
+    setJwtToken,
   };
 }
