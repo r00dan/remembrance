@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { get, post, BodyParams } from '../utils/apiHelper';
+import { post, BodyParams } from '../utils/apiHelper';
 
 export interface ISignUpParams {
   email: string;
@@ -13,10 +13,6 @@ export interface ISignInParams {
 }
 
 const apiName = 'auth/local';
-
-export async function pingMe() {
-  await get('users/me');
-}
 
 export async function signUp(params: BodyParams<ISignUpParams>) {
   const response = await post(`${apiName}/register`, { ...params });

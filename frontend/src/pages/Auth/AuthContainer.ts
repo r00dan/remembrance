@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ChangeEvent, createElement, useState } from 'react';
 import { useRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
 
 import {
   ISignUpConfig,
@@ -15,9 +16,10 @@ import {
   authorizedUserEmailState,
   authorizedUserTokenState,
 } from '../../store/atoms';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { Routes } from '../../Router';
 
 export function AuthContainer() {
+  const navigate = useNavigate();
   const [username, setUsername] = useRecoilState(authorizedUserUsernameState);
   const [email, setEmail] = useRecoilState(authorizedUserEmailState);
   const [token, setToken] = useRecoilState(authorizedUserTokenState);
@@ -26,8 +28,6 @@ export function AuthContainer() {
   const [signInError, setSignInError] = useState<string | null>(null);
   const [signUpConfig, setSignUpConfig] = useState<ISignUpConfig>({ email: '', username: '', password: '' });
   const [signInConfig, setSignInConfig] = useState<ISignInConfig>({ identifier: '', password: '' });
-
-  const { updateStoreItem } = useLocalStorage('auth_token');
 
   function handleSignUpEmailChange({ target: { value } }: ChangeEvent<HTMLInputElement>): void {
     setSignUpConfig((prevState) => ({
@@ -84,10 +84,12 @@ export function AuthContainer() {
       },
     } = response;
 
-    updateStoreItem(jwt);
+    window.localStorage.setItem('auth_token', jwt);
     setToken(jwt);
     setUsername(username);
     setEmail(email);
+    navigate(Routes.MAIN, { replace: true });
+    window.open('/', '_self'); // TODO: redirect to main page
   }
 
   async function handleSignUpClick(): Promise<void> {

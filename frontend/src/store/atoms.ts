@@ -5,10 +5,16 @@ export enum Atoms {
   EMAIL = 'authUser_email',
   TOKEN = 'authUser_token',
   SERVICES = 'authUser_services',
+  CODE = 'authUser_code',
 }
 
 export const authorizedUserUsernameState = atom<string>({
   key: Atoms.USERNAME,
+  default: '',
+});
+
+export const authorizedUserCodeState = atom<string>({
+  key: Atoms.CODE,
   default: '',
 });
 
