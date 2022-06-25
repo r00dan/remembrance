@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryColumn, Index } from 'typeorm';
 
 import { Service } from './service.model';
 
@@ -7,6 +7,7 @@ export class User {
   @PrimaryColumn()
   public id!: string;
 
+  @Index()
   @Column()
   public email!: string;
 

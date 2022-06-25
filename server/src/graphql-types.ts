@@ -43,7 +43,7 @@ export interface IQuery {
 }
 
 export interface IMutation {
-    createUser(createUserInput: CreateUserInput): User | Promise<User>;
+    createUser(createUserInput: CreateUserInput): Nullable<User> | Promise<Nullable<User>>;
 }
 
 type Nullable<T> = T | null;

@@ -1,13 +1,14 @@
+import { join } from 'path';
 import { Module } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
-import { UserUseCase } from './domain/user.use-case';
+import { UserUseCase } from 'src/domain';
 import * as model from 'src/inrastructure/model';
-import { join } from 'path';
-import { UserResolver } from './presentation/resolver/user.resolver';
-import { TestResolver } from './presentation/resolver/test.resolver';
+import { UserResolver } from 'src/presentation/resolver/user.resolver';
+import { TestResolver } from 'src/presentation/resolver/test.resolver';
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -22,9 +23,8 @@ import { TestResolver } from './presentation/resolver/test.resolver';
       entities: [model.User, model.Service],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([model.User]),
+    TypeOrmModule.forFeature([model.User, model.Service]),
   ],
-  controllers: [],
-  providers: [UserResolver, TestResolver, UserUseCase],
+  providers: [UserResolver, TestResolver, UserUseCase, JwtService],
 })
 export class AppModule {}

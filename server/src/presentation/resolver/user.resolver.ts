@@ -1,7 +1,7 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 
-import { UserUseCase } from 'src/domain/user.use-case';
-import { CreateUserInput } from '../input/create-user.input';
+import { UserUseCase } from 'src/domain';
+import { CreateUserInput } from 'src/presentation/input';
 import * as model from 'src/inrastructure/model';
 
 @Resolver('User')
