@@ -62,6 +62,6 @@ module.exports = {
         "@typescript-eslint/no-use-before-define": "error",
         "@typescript-eslint/no-duplicate-imports": "error",
         "@typescript-eslint/no-unsafe-return": "error"
-    }
+    },
 }
 

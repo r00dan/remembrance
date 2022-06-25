@@ -14,6 +14,9 @@ export interface ISignInParams {
 
 const apiName = 'auth/local';
 
+export const signUpUrl = 'auth/local/register';
+export const signInUrl = 'auth/local/';
+
 export async function signUp(params: BodyParams<ISignUpParams>) {
   const response = await post(`${apiName}/register`, { ...params });
   return response;

@@ -1,8 +1,6 @@
 import { ChangeEvent } from 'react';
-import { ISignInParams, ISignUpParams } from '../../api/auth';
+import { UsersPermissionsLoginInput, UsersPermissionsRegisterInput } from '../../apollo-types';
 
-export interface ISignUpConfig extends ISignUpParams {}
-export interface ISignInConfig extends ISignInParams { }
 export interface IAuthorizedUser {
   username: string;
   token: string;
@@ -10,8 +8,8 @@ export interface IAuthorizedUser {
 }
 
 export interface IAuthProps {
-  signUpConfig: ISignUpConfig;
-  signInConfig: ISignInConfig;
+  signUpConfig: UsersPermissionsRegisterInput;
+  signInConfig: UsersPermissionsLoginInput;
   signUpError: string | null;
   signInError: string | null;
   onSignUpEmailChange: (event: ChangeEvent<HTMLInputElement>) => void;

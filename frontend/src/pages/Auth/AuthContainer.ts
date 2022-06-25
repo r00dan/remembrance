@@ -1,15 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ChangeEvent, createElement, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
 
-import {
-  ISignUpConfig,
-  IAuthProps,
-  ISignInConfig,
-} from './types';
+import { SIGNIN, SIGNUP } from '../../api/Auth';
+
 import { Auth } from './Auth';
-import { signIn, signUp } from '../../api/auth';
 import { getError, Errors } from '../../utils/errors';
 import {
   authorizedUserUsernameState,
@@ -17,48 +16,66 @@ import {
   authorizedUserTokenState,
 } from '../../store/atoms';
 import { Routes } from '../../Router';
+import { IAuthProps } from './types';
 
 export function AuthContainer() {
   const navigate = useNavigate();
+
   const [username, setUsername] = useRecoilState(authorizedUserUsernameState);
   const [email, setEmail] = useRecoilState(authorizedUserEmailState);
   const [token, setToken] = useRecoilState(authorizedUserTokenState);
 
   const [signUpError, setSignUpError] = useState<string | null>(null);
   const [signInError, setSignInError] = useState<string | null>(null);
-  const [signUpConfig, setSignUpConfig] = useState<ISignUpConfig>({ email: '', username: '', password: '' });
-  const [signInConfig, setSignInConfig] = useState<ISignInConfig>({ identifier: '', password: '' });
+  const [signUpConfig, setSignUpConfig] = useState<any>({ email: '', username: '', password: '' });
+  const [signInConfig, setSignInConfig] = useState<any>({ identifier: '', password: '' });
+
+  // const [
+  //   signUp,
+  //   {
+  //     data: signUpData,
+  //     loading: isSignUpLoading,
+  //   },
+  // ] = useMutation<UsersPermissionsLoginPayload, UsersPermissionsRegisterInput>(SIGNUP);
+
+  // const [
+  //   signIn,
+  //   {
+  //     data: signInData,
+  //     loading: isSignInLoading,
+  //   },
+  // ] = useMutation<{ register: UsersPermissionsLoginPayload }, { input: UsersPermissionsLoginInput }>(SIGNIN);
 
   function handleSignUpEmailChange({ target: { value } }: ChangeEvent<HTMLInputElement>): void {
-    setSignUpConfig((prevState) => ({
+    setSignUpConfig((prevState: any) => ({
       ...prevState,
       email: value,
     }));
   }
 
   function handleSignUpUsernameChange({ target: { value } }: ChangeEvent<HTMLInputElement>): void {
-    setSignUpConfig((prevState) => ({
+    setSignUpConfig((prevState: any) => ({
       ...prevState,
       username: value,
     }));
   }
 
   function handleSignUpPasswordChange({ target: { value } }: ChangeEvent<HTMLInputElement>): void {
-    setSignUpConfig((prevState) => ({
+    setSignUpConfig((prevState: any) => ({
       ...prevState,
       password: value,
     }));
   }
 
   function handleSignInIdentifierChange({ target: { value } }: ChangeEvent<HTMLInputElement>): void {
-    setSignInConfig((prevState) => ({
+    setSignInConfig((prevState: any) => ({
       ...prevState,
       identifier: value,
     }));
   }
 
   function handleSignInPasswordChange({ target: { value } }: ChangeEvent<HTMLInputElement>): void {
-    setSignInConfig((prevState) => ({
+    setSignInConfig((prevState: any) => ({
       ...prevState,
       password: value,
     }));
@@ -74,7 +91,6 @@ export function AuthContainer() {
     return !!identifier.trim() && !!password.trim();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function onSuccesAuth(response: any): void {
     const {
       jwt,
@@ -84,10 +100,10 @@ export function AuthContainer() {
       },
     } = response;
 
-    window.localStorage.setItem('auth_token', jwt);
-    setToken(jwt);
+    window.localStorage.setItem('auth_token', jwt!);
+    setToken(jwt!);
     setUsername(username);
-    setEmail(email);
+    setEmail(email!);
     navigate(Routes.MAIN, { replace: true });
     window.open('/', '_self'); // TODO: redirect to main page
   }
@@ -97,11 +113,10 @@ export function AuthContainer() {
 
     if (isValid) {
       setSignUpError(null);
-      const response = await signUp(signUpConfig);
-      if (response.jwt) {
-        onSuccesAuth(response);
+      if (!signUpError) {
+        // onSuccesAuth(signUpResponse);
       } else {
-        setSignUpError(getError(Errors.UNKNOWN, response.error.message));
+        setSignUpError(getError(Errors.UNKNOWN, signUpError));
       }
     } else {
       setSignUpError(getError(Errors.AUTH_CREDENTIALS));
@@ -113,13 +128,6 @@ export function AuthContainer() {
 
     if (isValid) {
       setSignInError(null);
-      const response = await signIn(signInConfig);
-
-      if (response.jwt) {
-        onSuccesAuth(response);
-      } else {
-        setSignInError(getError(Errors.UNKNOWN, response.error.message));
-      }
     } else {
       setSignInError(getError(Errors.AUTH_CREDENTIALS));
     }
