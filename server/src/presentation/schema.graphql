@@ -1,0 +1,40 @@
+scalar Date
+
+type User {
+  id: String!
+  email: String!
+  username: String!
+  password: String!
+  secureCode: String!
+  services: [Service]
+}
+
+input CreateUserInput {
+  id: String!
+  username: String!
+  email: String!
+  password: String!
+  secureCode: String!
+}
+
+type Service {
+  id: String!
+  name: String!
+  username: String!
+  email: String!
+  password: String!
+  phoneNumber: String!
+  twofactor: Boolean!
+  creationTime: Date!
+  updateTime: Date!
+  user: User!
+}
+
+type Query {
+  hello: String!
+  getAllUsers: [User!]
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+}
