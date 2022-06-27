@@ -17,6 +17,11 @@ input CreateUserInput {
   secureCode: String!
 }
 
+input LoginUserInput {
+  email: String!
+  password: String!
+}
+
 type Service {
   id: String!
   name: String!
@@ -30,9 +35,16 @@ type Service {
   user: User!
 }
 
+type AuthUser {
+  jwt: String!
+  user: User!
+}
+
 type Query {
   hello: String!
   getAllUsers: [User!]
+  getCurrentUserInfo(email: String): User
+  loginUser(loginUserInput: LoginUserInput!): AuthUser
 }
 
 type Mutation {
