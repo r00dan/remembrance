@@ -11,8 +11,8 @@ import {
   concat,
 } from '@apollo/client';
 
+import { Toast } from 'components';
 import { Router } from './Router';
-import { Toast } from './components';
 
 import './assets/styles/index.css';
 

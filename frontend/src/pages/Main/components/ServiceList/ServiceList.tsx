@@ -1,9 +1,5 @@
+import { IServiceListProps } from 'interfaces';
 import { Service, AddNewService } from '../index';
-import { IService } from '../Service/ServiceContainer';
-
-export interface IServiceListProps {
-  data: IService[];
-}
 
 export function ServiceList({ data }: IServiceListProps) {
   return (

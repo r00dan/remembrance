@@ -1,5 +1,5 @@
 import { createElement, useState, useEffect } from 'react';
-import { IService } from './components/Service/ServiceContainer';
+import { IService } from 'interfaces';
 
 import { Main } from './Main';
 

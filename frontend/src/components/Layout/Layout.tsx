@@ -1,6 +1,5 @@
-import { ILayoutProps } from './types';
-
-import { Header } from './components';
+import { ILayoutProps } from 'interfaces';
+import { Header } from './components/Header/Header';
 
 import styles from './Layout.module.scss';
 

@@ -1,17 +1,13 @@
 import { useEffect } from 'react';
 import { useRoutes } from 'react-router-dom';
-import { useInit } from './hooks/useInit';
 
+import { useInit } from 'hooks/useInit';
+import { useStore } from 'store/useStore';
 import {
   MainPage,
   AuthPage,
-} from './pages';
-import { useStore } from './store/useStore';
-
-export enum Routes {
-  MAIN = '/',
-  AUTH = 'auth',
-}
+} from 'pages';
+import { Routes } from 'types/enums';
 
 export function Router() {
   // const storage = window.localStorage;

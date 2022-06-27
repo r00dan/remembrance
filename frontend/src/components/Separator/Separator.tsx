@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 
-import { ISeparatorProps } from './types';
+import { ISeparatorProps } from 'interfaces';
 
 import styles from './Separator.module.scss';
 

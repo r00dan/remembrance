@@ -1,12 +1,13 @@
 import {
   Button,
-  ButtonThemes,
   Input,
   Layout,
   Separator,
-} from '../../components';
+} from 'components';
+import { IAuthProps } from 'interfaces';
+import { ButtonThemes } from 'types/enums';
+
 import styles from './Auth.module.scss';
-import { IAuthProps } from './types';
 
 export function Auth({
   signUpConfig,

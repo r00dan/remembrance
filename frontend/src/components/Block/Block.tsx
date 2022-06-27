@@ -1,4 +1,4 @@
-import { IBlockProps } from './types';
+import { IBlockProps } from 'interfaces';
 
 import styles from './Block.module.scss';
 

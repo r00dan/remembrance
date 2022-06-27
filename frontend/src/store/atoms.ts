@@ -1,14 +1,6 @@
 import { atom } from 'recoil';
 
-export enum Atoms {
-  USERNAME = 'authUser_username',
-  EMAIL = 'authUser_email',
-  TOKEN = 'authUser_token',
-  SERVICES = 'authUser_services',
-  CODE = 'authUser_code',
-  TOAST_TEXT = 'toast_text',
-  TOAST_TIMEOUT = 'toast_timeout',
-}
+import { Atoms } from 'types/enums';
 
 export const authorizedUserUsernameState = atom<string>({
   key: Atoms.USERNAME,

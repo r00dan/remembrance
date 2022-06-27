@@ -1,7 +1,7 @@
 import { createElement, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
-import { toastTextState, toastTimeoutState } from '../../store/atoms';
+import { toastTextState, toastTimeoutState } from 'store/atoms';
 import { Toast } from './Toast';
 
 export function ToastContainer() {

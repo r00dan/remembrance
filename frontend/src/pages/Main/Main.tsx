@@ -1,17 +1,13 @@
 import { useEffect } from 'react';
-import { getServices } from '../../api/services';
-import { getUsers } from '../../api/users';
-import {
-  Layout,
-} from '../../components';
-import { IService } from './components/Service/ServiceContainer';
-import { ServiceList } from './components/ServiceList/ServiceList';
+
+import { IMainProps } from 'interfaces';
+import { getServices } from 'api/services';
+import { getUsers } from 'api/users';
+import { Layout } from 'components';
+
+import { ServiceList } from 'pages/Main/components/ServiceList/ServiceList';
 
 import styles from './Main.module.scss';
-
-interface IMainProps {
-  services: IService[];
-}
 
 export function Main({ services }: IMainProps) {
   useEffect(() => {

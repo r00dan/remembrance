@@ -4,19 +4,15 @@
 import { ChangeEvent, createElement, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+// import { useMutation } from '@apollo/client';
 
-import { SIGNIN, SIGNUP } from '../../api/Auth';
-
-import { Auth } from './Auth';
-import { getError, Errors } from '../../utils/errors';
 import {
   authorizedUserUsernameState,
   authorizedUserEmailState,
   authorizedUserTokenState,
-} from '../../store/atoms';
-import { Routes } from '../../Router';
-import { IAuthProps } from './types';
+} from 'store/atoms';
+import { Routes } from 'types/enums';
+import { Auth } from './Auth';
 
 export function AuthContainer() {
   const navigate = useNavigate();
@@ -110,27 +106,12 @@ export function AuthContainer() {
 
   async function handleSignUpClick(): Promise<void> {
     const isValid = areSignUpFieldsValid();
-
-    if (isValid) {
-      setSignUpError(null);
-      if (!signUpError) {
-        // onSuccesAuth(signUpResponse);
-      } else {
-        setSignUpError(getError(Errors.UNKNOWN, signUpError));
-      }
-    } else {
-      setSignUpError(getError(Errors.AUTH_CREDENTIALS));
-    }
+    onSuccesAuth({});
   }
 
   async function handleSignInClick(): Promise<void> {
     const isValid = areSignInFieldsValid();
-
-    if (isValid) {
-      setSignInError(null);
-    } else {
-      setSignInError(getError(Errors.AUTH_CREDENTIALS));
-    }
+    onSuccesAuth({});
   }
 
   return createElement(Auth, {
@@ -145,5 +126,5 @@ export function AuthContainer() {
     onSignInPasswordChange: handleSignInPasswordChange,
     onSignUpClick: handleSignUpClick,
     onSignInClick: handleSignInClick,
-  } as IAuthProps);
+  });
 }

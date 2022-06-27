@@ -1,11 +1,12 @@
 import classnames from 'classnames';
 
-import { IButtonProps, Themes } from './types';
+import { IButtonProps } from 'interfaces';
+import { ButtonThemes } from '../../types/enums';
 
 import styles from './Button.module.scss';
 
 export function Button({
-  theme = Themes.PRIMARY,
+  theme = ButtonThemes.PRIMARY,
   children,
   className,
   onClick,

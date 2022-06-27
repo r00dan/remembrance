@@ -6,11 +6,18 @@
   align-items: center;
   justify-content: center;
   background-color: #fff;
-  cursor: pointer;
 }
 
 .addButton {
+  user-select: none;
   transition-duration: .3s;
+  cursor: pointer;
+
+  & svg {
+      width: 21px;
+      height: 21px;
+  }
+
   &__rotated {
     transform: rotate(45deg);
   }

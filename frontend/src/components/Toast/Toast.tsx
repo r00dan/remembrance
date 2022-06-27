@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 
-import { IToastProps } from './types';
+import { IToastProps } from 'interfaces';
 
 import styles from './Toast.module.scss';
 

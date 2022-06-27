@@ -1,15 +1,8 @@
-import { createElement, useState } from 'react';
-import { useNotification } from '../../../../hooks/useNotification';
+import { createElement, useState, useEffect } from 'react';
+import { IService } from 'interfaces';
+import { useNotification } from 'hooks/useNotification';
 
 import { Service } from './Service';
-
-export interface IService {
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-  icon?: string;
-}
 
 export function ServiceContainer({
   name,
@@ -20,7 +13,9 @@ export function ServiceContainer({
 }: IService) {
   const [collapsed, setCollapse] = useState<boolean>(true);
   const [editMode, setEditMode] = useState<boolean>(false);
+
   const { updateToast } = useNotification();
+
   const handleCollapse = () => setCollapse(!collapsed);
   const handleEditMode = () => setEditMode(!editMode);
   const hadleInputClick = (event: React.MouseEvent<HTMLInputElement>) => {
@@ -32,6 +27,12 @@ export function ServiceContainer({
       updateToast('Copied!');
     }
   };
+
+  useEffect(() => {
+    if (editMode) {
+      setCollapse(false);
+    }
+  }, [editMode]);
 
   return createElement(Service, {
     name,

@@ -1,9 +1,6 @@
 import { useState } from 'react';
 
-enum InputTypes {
-  TEXT = 'text',
-  PASSWORD = 'password',
-}
+import { InputTypes } from 'types/enums';
 
 export function useInput(isPassword: boolean) {
   const [state, setState] = useState<boolean>(isPassword);

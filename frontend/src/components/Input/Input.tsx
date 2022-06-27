@@ -1,7 +1,7 @@
-import { IInputProps } from './types';
+import { IInputProps } from 'interfaces';
+import { useInput } from './useInput';
 
 import styles from './Input.module.scss';
-import { useInput } from './useInput';
 
 export function Input({
   id,

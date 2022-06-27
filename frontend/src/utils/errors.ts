@@ -1,8 +1,4 @@
-export enum Errors {
-  AUTH_CREDENTIALS = 'AUTH_CREDENTIALS',
-  USER_NOT_FOUND = 'USER_NOT_FOUND',
-  UNKNOWN = 'UNKNOWN',
-}
+import { Errors } from 'types/enums';
 
 export type Error = Record<Errors, string>;
 

@@ -1,7 +1,8 @@
 import classnames from 'classnames';
 
+import { PlusIcon } from 'assets/svg';
+import { IAddNewServiceProps } from 'interfaces';
 import { ListItem } from '../ListItem/ListItem';
-import { IAddNewServiceProps } from './types';
 import { Form } from '../index';
 
 import styles from './AddNewService.module.scss';
@@ -21,7 +22,7 @@ export function AddNewService({
         ])}
         onClick={handleCollapse}
       >
-        ➕
+        <PlusIcon />
       </div>
       {collapsed && (
         <Form />

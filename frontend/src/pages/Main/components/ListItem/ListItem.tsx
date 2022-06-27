@@ -1,10 +1,8 @@
 import classnames from 'classnames';
-import styles from './ListItem.module.scss';
 
-interface IListItemProps {
-  children: React.ReactNode;
-  className?: string;
-}
+import { IListItemProps } from 'interfaces';
+
+import styles from './ListItem.module.scss';
 
 export function ListItem({
   children,

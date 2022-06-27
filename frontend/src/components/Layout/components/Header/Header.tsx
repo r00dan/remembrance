@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
 
-import { authorizedUserUsernameState } from '../../../../store/atoms';
+import { authorizedUserUsernameState } from 'store/atoms';
 
 import styles from './Header.module.scss';
 
