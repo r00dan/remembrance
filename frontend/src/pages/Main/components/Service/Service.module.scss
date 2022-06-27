@@ -40,11 +40,6 @@
   justify-content: start;
 }
 
-.actionButtons {
-  width: 100%;
-  display: flex;
-}
-
 .displayButton {
   width: 21px;
   height: 21px;
@@ -54,4 +49,22 @@
   &__reverted {
     transform: rotate(270deg);
   }
+}
+
+.actionButtons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.editButton {
+  width: 40%;
+}
+
+.serviceControlButtons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }

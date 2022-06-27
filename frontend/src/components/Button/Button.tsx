@@ -12,13 +12,15 @@ export function Button({
 }: IButtonProps) {
   return (
     <div
-      className={styles.root}
+      className={classnames([
+        styles.root,
+        !!className && className,
+      ])}
       onClick={onClick}
     >
       <button className={classnames([
         styles.button,
         styles[theme],
-        !!className && className,
       ])}
       >
         {children}

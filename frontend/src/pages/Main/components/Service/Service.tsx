@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import React from 'react';
 
 import { ChevronIcon } from '../../../../assets/svg';
-import { Button, Input } from '../../../../components';
+import { Button, ButtonThemes, Input } from '../../../../components';
 
 import styles from './Service.module.scss';
 
@@ -75,12 +75,12 @@ export function Service({
               onChange={() => {}}
             />
             <div className={styles.actionButtons}>
-              <Button onClick={handleEditMode}>Edit</Button>
+              <Button theme={ButtonThemes.GRADIENT} className={styles.editButton} onClick={handleEditMode}>{editMode ? 'Close' : 'Edit'}</Button>
               {editMode && (
-              <>
-                <Button onClick={() => {}}>Save</Button>
-                <Button onClick={() => {}}>Remove</Button>
-              </>
+              <div className={styles.serviceControlButtons}>
+                <Button theme={ButtonThemes.PRIMARY} onClick={() => {}}>Save</Button>
+                <Button theme={ButtonThemes.SECONDARY} onClick={() => {}}>Remove</Button>
+              </div>
               )}
             </div>
           </>
