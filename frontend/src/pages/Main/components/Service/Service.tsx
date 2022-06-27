@@ -40,6 +40,7 @@ export function Service({
           <div className={styles.baseInfo}>
             <div className={styles.icon}>{icon}</div>
             <div className={styles.serviceName}>{name}</div>
+            <div className={styles.identifier}>{username || email}</div>
           </div>
           <ChevronIcon
             className={classnames([
