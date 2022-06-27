@@ -3,12 +3,17 @@ import { getServices } from '../../api/services';
 import { getUsers } from '../../api/users';
 import {
   Layout,
-  Block,
 } from '../../components';
+import { IService } from './components/Service/ServiceContainer';
+import { ServiceList } from './components/ServiceList/ServiceList';
 
 import styles from './Main.module.scss';
 
-export function Main() {
+interface IMainProps {
+  services: IService[];
+}
+
+export function Main({ services }: IMainProps) {
   useEffect(() => {
     getServices();
     getUsers();
@@ -16,8 +21,9 @@ export function Main() {
   return (
     <Layout>
       <div className={styles.root}>
-        <Block>Форма создания сервиса</Block>
-        <Block>Список сервисов</Block>
+        <ServiceList
+          data={services}
+        />
       </div>
     </Layout>
   );
