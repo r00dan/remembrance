@@ -7,6 +7,8 @@ import {
   authorizedUserServicesState,
   authorizedUserEmailState,
   authorizedUserCodeState,
+  toastTextState,
+  toastTimeoutState,
 } from './atoms';
 
 export function useStore() {
@@ -15,6 +17,8 @@ export function useStore() {
   const [emal, setEmail] = useRecoilState(authorizedUserEmailState);
   const [token, setToken] = useRecoilState(authorizedUserTokenState);
   const [services, setServices] = useRecoilState(authorizedUserServicesState);
+  const [toastText, setToastText] = useRecoilState(toastTextState);
+  const [toastTimeout, setToastTimeout] = useRecoilState(toastTimeoutState);
 
   return {};
 }

@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import Helmet from 'react-helmet';
@@ -13,6 +12,7 @@ import {
 } from '@apollo/client';
 
 import { Router } from './Router';
+import { Toast } from './components';
 
 import './assets/styles/index.css';
 
@@ -52,6 +52,7 @@ root.render(
           <title>Remembrance</title>
         </Helmet>
         <Router />
+        <Toast />
       </BrowserRouter>
     </RecoilRoot>
   </ApolloProvider>,

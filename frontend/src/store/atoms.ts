@@ -6,6 +6,8 @@ export enum Atoms {
   TOKEN = 'authUser_token',
   SERVICES = 'authUser_services',
   CODE = 'authUser_code',
+  TOAST_TEXT = 'toast_text',
+  TOAST_TIMEOUT = 'toast_timeout',
 }
 
 export const authorizedUserUsernameState = atom<string>({
@@ -32,4 +34,14 @@ export const authorizedUserTokenState = atom<string>({
 export const authorizedUserServicesState = atom<any[]>({
   key: Atoms.SERVICES,
   default: [],
+});
+
+export const toastTextState = atom<string>({
+  key: Atoms.TOAST_TEXT,
+  default: '',
+});
+
+export const toastTimeoutState = atom<number>({
+  key: Atoms.TOAST_TIMEOUT,
+  default: 3000,
 });
