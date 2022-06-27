@@ -1,5 +1,4 @@
-import { AddNewService } from '../AddNewService/AddNewService';
-import { Service } from '../index';
+import { Service, AddNewService } from '../index';
 import { IService } from '../Service/ServiceContainer';
 
 export interface IServiceListProps {
