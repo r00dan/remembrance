@@ -15,6 +15,11 @@ export interface CreateUserInput {
     secureCode: string;
 }
 
+export interface LoginUserInput {
+    email: string;
+    password: string;
+}
+
 export interface User {
     id: string;
     email: string;
@@ -37,9 +42,16 @@ export interface Service {
     user: User;
 }
 
+export interface AuthUser {
+    jwt: string;
+    user: User;
+}
+
 export interface IQuery {
     hello(): string | Promise<string>;
     getAllUsers(): Nullable<User[]> | Promise<Nullable<User[]>>;
+    getCurrentUserInfo(email?: Nullable<string>): Nullable<User> | Promise<Nullable<User>>;
+    loginUser(loginUserInput: LoginUserInput): Nullable<AuthUser> | Promise<Nullable<AuthUser>>;
 }
 
 export interface IMutation {

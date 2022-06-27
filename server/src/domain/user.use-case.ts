@@ -5,7 +5,12 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
 import * as model from 'src/inrastructure/model';
-import { CreateUserInput, PayloadInput } from 'src/presentation/input';
+import {
+  CreateUserInput,
+  LoginUserInput,
+  PayloadInput,
+} from 'src/presentation/input';
+import { JWT_SECRET } from 'src/constants';
 
 @Injectable()
 export class UserUseCase {
@@ -15,18 +20,28 @@ export class UserUseCase {
     private readonly jwtService: JwtService,
   ) {}
 
+  private readonly salt: string = '$2b$10$ructDmRJrek3Ns4qwkCVie';
+
   public async getAllUsers(): Promise<model.User[]> {
-    return this.userRepository.find();
+    return await this.userRepository.find();
+  }
+
+  public async getCurrentUserInfo(email: string): Promise<model.User> {
+    return await this.userRepository.findOne({
+      where: {
+        email,
+      },
+    });
   }
 
   public async createUser(input: CreateUserInput): Promise<model.User> {
     const { email, password } = input;
-    console.log(await this.isUserExists(email));
-    if (await this.isUserExists(email)) {
-      return null;
+    const candidate = await this.userRepository.findOne({ where: { email } });
+
+    if (candidate) {
+      return null; // пиздануть ошибку
     }
-    const salt = await bcrypt.genSalt();
-    const hash = await bcrypt.hash(password, salt);
+    const hash = await bcrypt.hash(password, this.salt);
     input.password = hash;
 
     const user = await this.userRepository.create(input);
@@ -35,32 +50,52 @@ export class UserUseCase {
     return user;
   }
 
-  private async isUserExists(email: string): Promise<boolean> {
-    const result = await this.userRepository.findOne({ where: { email } });
-    return !!result;
-  }
+  public async loginUser(
+    input: LoginUserInput,
+  ): Promise<{ jwt: string; user: Partial<model.User> } | null> {
+    const { email, password } = input;
+    const user = await this.validateUser({ email, password });
+    if (user) {
+      const hashedPassword = await bcrypt.hash(password, this.salt);
 
-  private async validateUser({
-    username,
-    password,
-  }: Partial<model.User>): Promise<any> {
-    const foundUser = await this.userRepository.findOne({
-      where: { username },
-    });
+      console.log({
+        user: user.password,
+        hashed: hashedPassword,
+      });
 
-    if (foundUser) {
-      if (await bcrypt.compare(password, foundUser.password)) {
-        const { password, ...result } = foundUser;
-        return result;
+      if (user.password === hashedPassword) {
+        const { id: userId, username } = user;
+        const jwt = await this.getToken({ userId, username });
+        return {
+          jwt,
+          user,
+        };
       }
       return null;
     }
     return null;
   }
 
-  private async getToken(payload: PayloadInput): Promise<{ token: string }> {
-    return {
-      token: this.jwtService.sign(payload),
-    };
+  private async validateUser({
+    email,
+    password,
+  }: Partial<model.User>): Promise<Partial<model.User> | null> {
+    const foundUser = await this.userRepository.findOne({
+      where: { email },
+    });
+
+    if (foundUser) {
+      if (await bcrypt.compare(password, foundUser.password)) {
+        return foundUser;
+      }
+      return null;
+    }
+    return null;
+  }
+
+  private async getToken(payload: PayloadInput): Promise<string> {
+    return await this.jwtService.sign(payload, {
+      secret: JWT_SECRET,
+    });
   }
 }

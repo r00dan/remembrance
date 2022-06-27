@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { Column, Entity, OneToMany, PrimaryColumn, Index } from 'typeorm';
 
 import { Service } from './service.model';
@@ -11,6 +12,7 @@ export class User {
   @Column()
   public email!: string;
 
+  @Index()
   @Column()
   public username!: string;
 
@@ -19,6 +21,10 @@ export class User {
 
   @Column()
   public secureCode!: string;
+
+  @Column({ nullable: true })
+  @Exclude()
+  refresh_token?: string;
 
   @OneToMany(() => Service, (service) => service.user)
   public services!: Service[];
