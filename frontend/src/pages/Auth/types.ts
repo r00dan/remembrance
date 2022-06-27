@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ChangeEvent } from 'react';
-import { UsersPermissionsLoginInput, UsersPermissionsRegisterInput } from '../../apollo-types';
 
 export interface IAuthorizedUser {
   username: string;
@@ -8,8 +8,8 @@ export interface IAuthorizedUser {
 }
 
 export interface IAuthProps {
-  signUpConfig: UsersPermissionsRegisterInput;
-  signInConfig: UsersPermissionsLoginInput;
+  signUpConfig: any;
+  signInConfig: any;
   signUpError: string | null;
   signInError: string | null;
   onSignUpEmailChange: (event: ChangeEvent<HTMLInputElement>) => void;

@@ -1,0 +1,13 @@
+@import '../../../../assets/styles/variables.scss';
+
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #eee;
+  }
+}

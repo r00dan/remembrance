@@ -8,11 +8,20 @@ export function Input({
   value,
   label,
   isPassword = false,
+  disabled = false,
   onChange,
+  onClick = () => {},
 }: IInputProps) {
-  const { visible, inputType, onChangeVisibility } = useInput(isPassword);
+  const {
+    visible,
+    inputType,
+    onChangeVisibility,
+  } = useInput(isPassword);
   return isPassword ? (
-    <div className={styles.root}>
+    <div
+      className={styles.root}
+      onClick={onClick}
+    >
       {label && (
         <label
           htmlFor={id}
@@ -26,6 +35,7 @@ export function Input({
         className={styles.input}
         type={inputType}
         value={value}
+        disabled={disabled}
         onChange={onChange}
       />
       <div
@@ -36,7 +46,10 @@ export function Input({
       </div>
     </div>
   ) : (
-    <div className={styles.root}>
+    <div
+      className={styles.root}
+      onClick={onClick}
+    >
       {label && (
         <label
           htmlFor={id}
@@ -50,6 +63,7 @@ export function Input({
         className={styles.input}
         type="text"
         value={value}
+        disabled={disabled}
         onChange={onChange}
       />
     </div>

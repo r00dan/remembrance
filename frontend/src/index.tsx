@@ -45,16 +45,14 @@ const client = new ApolloClient({
 });
 
 root.render(
-  <React.StrictMode>
-    <ApolloProvider client={client}>
-      <RecoilRoot>
-        <BrowserRouter>
-          <Helmet>
-            <title>Remembrance</title>
-          </Helmet>
-          <Router />
-        </BrowserRouter>
-      </RecoilRoot>
-    </ApolloProvider>
-  </React.StrictMode>,
+  <ApolloProvider client={client}>
+    <RecoilRoot>
+      <BrowserRouter>
+        <Helmet>
+          <title>Remembrance</title>
+        </Helmet>
+        <Router />
+      </BrowserRouter>
+    </RecoilRoot>
+  </ApolloProvider>,
 );
