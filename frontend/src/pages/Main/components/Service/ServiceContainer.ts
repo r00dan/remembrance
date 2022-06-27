@@ -1,4 +1,5 @@
 import { createElement, useState } from 'react';
+import { useNotification } from '../../../../hooks/useNotification';
 
 import { Service } from './Service';
 
@@ -19,7 +20,7 @@ export function ServiceContainer({
 }: IService) {
   const [collapsed, setCollapse] = useState<boolean>(true);
   const [editMode, setEditMode] = useState<boolean>(false);
-
+  const { updateToast } = useNotification();
   const handleCollapse = () => setCollapse(!collapsed);
   const handleEditMode = () => setEditMode(!editMode);
   const hadleInputClick = (event: React.MouseEvent<HTMLInputElement>) => {
@@ -27,9 +28,8 @@ export function ServiceContainer({
     const { value } = target;
 
     if (!editMode && value) {
-      console.log(`Copied string: ${value}`);
       window.navigator.clipboard.writeText(value);
-      // notification
+      updateToast('Copied!');
     }
   };
 

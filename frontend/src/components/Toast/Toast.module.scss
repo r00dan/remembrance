@@ -1,0 +1,12 @@
+.root {
+  width: 100px;
+  height: 30px;
+  background-color: black;
+  color: white;
+  transition-duration: .3s;
+  opacity: 0;
+  
+  &__visible {
+    opacity: 1;
+  }
+}
