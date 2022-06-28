@@ -1,3 +1,4 @@
+import { ServiceUseCase } from 'src/domain';
 import { join } from 'path';
 import { Module } from '@nestjs/common';
 import { JwtModule, JwtService } from '@nestjs/jwt';
@@ -5,13 +6,15 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ConfigModule } from '@nestjs/config';
+import * as dotenv from 'dotenv';
 
 import { UserUseCase } from 'src/domain';
 import * as model from 'src/inrastructure/model';
-import { UserResolver } from 'src/presentation/resolver/user.resolver';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { UserResolver } from 'src/presentation/resolver/user/resolver';
+import { ServiceResolver } from 'src/presentation/resolver/service/resolver';
 import { TestResolver } from 'src/presentation/resolver/test.resolver';
 import { JwtStrategy } from 'src/auth/jwt.strategy';
-import * as dotenv from 'dotenv';
 import { JWT_SECRET } from './constants';
 
 dotenv.config({ path: '.env' });
@@ -44,6 +47,14 @@ dotenv.config({ path: '.env' });
       },
     }),
   ],
-  providers: [UserResolver, TestResolver, UserUseCase, JwtService, JwtStrategy],
+  providers: [
+    TestResolver,
+    // UserResolver,
+    ServiceResolver,
+    UserUseCase,
+    ServiceUseCase,
+    JwtService,
+    JwtStrategy,
+  ],
 })
 export class AppModule {}

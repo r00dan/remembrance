@@ -15,13 +15,13 @@ export class Service {
   public username?: string;
 
   @Column({ nullable: true })
-  public email?: string;
+  public email!: string;
 
   @Column()
   public password!: string;
 
-  @Column()
-  public phoneNumber!: string;
+  @Column({ nullable: true })
+  public phoneNumber?: string;
 
   @Column({ nullable: true })
   public twofacor?: boolean;
@@ -32,8 +32,8 @@ export class Service {
 
   @Column()
   @Type(() => Date)
-  public updateTime!: Date;
+  public updateTime?: Date;
 
   @ManyToOne(() => User, (user) => user)
-  public user!: User;
+  public user?: User;
 }

@@ -1,5 +1,27 @@
 scalar Date
 
+type Service {
+  id: String!
+  name: String!
+  password: String!
+  email: String!
+  username: String
+  phoneNumber: String
+  icon: String
+  twofactor: Boolean
+  creationTime: Date
+}
+
+input CreateServiceInput {
+  id: String!
+  name: String!
+  password: String!
+  email: String!
+  username: String
+  phoneNumber: String
+  icon: String
+}
+
 type User {
   id: String!
   email: String!
@@ -7,6 +29,11 @@ type User {
   password: String!
   secureCode: String!
   services: [Service]
+}
+
+type AuthUser {
+  jwt: String!
+  user: User!
 }
 
 input CreateUserInput {
@@ -22,31 +49,18 @@ input LoginUserInput {
   password: String!
 }
 
-type Service {
-  id: String!
-  name: String!
-  username: String!
-  email: String!
-  password: String!
-  phoneNumber: String!
-  twofactor: Boolean!
-  creationTime: Date!
-  updateTime: Date!
-  user: User!
-}
-
-type AuthUser {
-  jwt: String!
-  user: User!
-}
-
 type Query {
   hello: String!
+  getService(id: String!): Service
+  getServices: [Service]
+
   getAllUsers: [User!]
   getCurrentUserInfo(email: String): User
   loginUser(loginUserInput: LoginUserInput!): AuthUser
 }
 
 type Mutation {
+  createService(createServiceInput: CreateServiceInput!): Service
   createUser(createUserInput: CreateUserInput!): User
+  removeService(id: String): Service
 }
