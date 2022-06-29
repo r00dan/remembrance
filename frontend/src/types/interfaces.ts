@@ -53,6 +53,7 @@ export interface IToastProps {
 }
 
 export interface IMainProps {
+  loading: boolean;
   services: IService[];
 }
 
@@ -80,10 +81,14 @@ export interface IFormProps {
   username: string;
   password: string;
   email: string;
+  phone: string;
+  newServiceLoading: boolean;
   handleChangeName: (event: ChangeEvent<HTMLInputElement>) => void;
   handleChangeUsername: (event: ChangeEvent<HTMLInputElement>) => void;
   handleChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
   handleChangeEmail: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleChangePhone: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleChangeTwofactor: (event: ChangeEvent<HTMLInputElement>) => void;
   handleClickCreate: () => void;
 }
 
@@ -107,4 +112,10 @@ export interface IServiceProps {
 
 export interface IServiceListProps {
   data: IService[];
+}
+
+export interface ICheckboxProps {
+  id: string;
+  label?: string;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }

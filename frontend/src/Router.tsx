@@ -5,7 +5,6 @@ import { useInit } from 'hooks/useInit';
 import { useStore } from 'store/useStore';
 import {
   MainPage,
-  AuthPage,
 } from 'pages';
 import { Routes } from 'types/enums';
 
@@ -23,10 +22,6 @@ export function Router() {
     {
       path: Routes.MAIN,
       element: <MainPage />,
-    },
-    {
-      path: Routes.AUTH,
-      element: <AuthPage />,
     },
   ]);
 

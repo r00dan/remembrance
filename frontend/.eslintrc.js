@@ -26,6 +26,7 @@ module.exports = {
         "@typescript-eslint",
         "react"
     ],
+    ignorePatterns: "src/types.apollo.tsx",
     rules: {
         "linebreak-style": "off",
         "no-use-before-define": "off",

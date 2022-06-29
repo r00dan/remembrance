@@ -1,4 +1,7 @@
 import { createElement, useState, useEffect } from 'react';
+import { useQuery } from '@apollo/client';
+
+import { GET_SERVICES } from 'api';
 import { IService } from 'interfaces';
 
 import { Main } from './Main';
@@ -6,26 +9,19 @@ import { Main } from './Main';
 export function MainContainer() {
   const [services, setServices] = useState<IService[]>([]);
 
-  const addService = (service: IService) => setServices((prevState) => ([...prevState, service]));
+  const {
+    data,
+    loading,
+  } = useQuery(GET_SERVICES);
 
   useEffect(() => {
-    /** getServicesQuery */
-
-    addService({
-      name: 'Battle.net',
-      username: 'myBattlenetUsername',
-      email: 'my@battle.net',
-      password: 'qweqwe',
-    });
-    addService({
-      name: 'Steam',
-      username: 'mySteamUsername',
-      email: 'my@steam.com',
-      password: '123qwe',
-    });
-  }, []);
+    if (data) {
+      setServices(data.getServices);
+    }
+  }, [loading]);
 
   return createElement(Main, {
+    loading,
     services,
   });
 }

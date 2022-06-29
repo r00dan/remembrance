@@ -30,6 +30,9 @@ dotenv.config({ path: '.env' });
       definitions: { path: join(process.cwd(), 'src/graphql-types.ts') },
       driver: ApolloDriver,
       playground: true,
+      cors: {
+        origin: 'http://localhost:3000',
+      },
     }),
     TypeOrmModule.forRoot({
       type: 'sqlite',

@@ -1,0 +1,12 @@
+query getServices {
+  getServices {
+    id
+    name
+    password
+    email
+    username
+    phoneNumber
+    twofactor
+    icon
+  }
+}

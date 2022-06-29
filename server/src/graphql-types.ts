@@ -15,6 +15,7 @@ export interface CreateServiceInput {
     username?: Nullable<string>;
     phoneNumber?: Nullable<string>;
     icon?: Nullable<string>;
+    twofactor?: Nullable<boolean>;
 }
 
 export interface CreateUserInput {

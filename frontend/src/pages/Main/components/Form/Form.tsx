@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 
-import { Button, Input } from 'components';
+import { Button, Input, Checkbox } from 'components';
 import { IFormProps } from 'interfaces';
 import { ButtonThemes } from 'types/enums';
 
@@ -11,11 +11,15 @@ export function Form({
   username,
   password,
   email,
+  phone,
+  newServiceLoading,
   handleChangeName,
   handleChangeUsername,
   handleChangePassword,
   handleChangeEmail,
   handleClickCreate,
+  handleChangePhone,
+  handleChangeTwofactor,
 }: IFormProps) {
   return (
     <div className={styles.root}>
@@ -23,9 +27,25 @@ export function Form({
         <div className={styles.cell}>
           <Input
             id={`new-serivce-name-${nanoid()}`}
-            label="Name"
+            label="Name*"
             value={name}
             onChange={handleChangeName}
+          />
+        </div>
+        <div className={styles.cell}>
+          <Input
+            id={`new-serivce-password-${nanoid()}`}
+            label="Password*"
+            value={password}
+            onChange={handleChangePassword}
+          />
+        </div>
+        <div className={styles.cell}>
+          <Input
+            id={`new-serivce-email-${nanoid()}`}
+            label="Email*"
+            value={email}
+            onChange={handleChangeEmail}
           />
         </div>
         <div className={styles.cell}>
@@ -38,18 +58,17 @@ export function Form({
         </div>
         <div className={styles.cell}>
           <Input
-            id={`new-serivce-password-${nanoid()}`}
-            label="Password"
-            value={password}
-            onChange={handleChangePassword}
+            id={`new-serivce-phoneNumber-${nanoid()}`}
+            label="Phone"
+            value={phone}
+            onChange={handleChangePhone}
           />
         </div>
         <div className={styles.cell}>
-          <Input
-            id={`new-serivce-email-${nanoid()}`}
-            label="Email"
-            value={email}
-            onChange={handleChangeEmail}
+          <Checkbox
+            id={`new-serivce-phoneNumber-${nanoid()}`}
+            label="Two factor"
+            onChange={handleChangeTwofactor}
           />
         </div>
       </div>
@@ -57,7 +76,7 @@ export function Form({
         theme={ButtonThemes.GRADIENT}
         onClick={handleClickCreate}
       >
-        Create
+        {newServiceLoading ? 'Updating' : 'Create'}
       </Button>
     </div>
   );

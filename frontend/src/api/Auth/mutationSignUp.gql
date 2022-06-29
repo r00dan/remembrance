@@ -1,9 +1,0 @@
-mutation signUp($usersPermissionsRegisterInput: UsersPermissionsRegisterInput!) {
-  register(input: $usersPermissionsRegisterInput) {
-    jwt
-    user {
-      username
-      email
-    }
-  }
-}
